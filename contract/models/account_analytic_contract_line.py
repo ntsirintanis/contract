@@ -3,7 +3,12 @@
 # Copyright 2014 Angel Moya <angel.moya@domatix.com>
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2016-2017 LasLabs Inc.
+<<<<<<< Updated upstream
 # Copyright 2015-2017 Tecnativa - Pedro M. Baeza
+=======
+# Copyright 2015-2018 Tecnativa - Pedro M. Baeza
+# Copyright 2018 Therp BV <http://therp.nl>
+>>>>>>> Stashed changes
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -74,6 +79,19 @@ class AccountAnalyticContractLine(models.Model):
         string="Sequence",
         default=10,
         help="Sequence of the contract line when displaying contracts",
+    )
+    date_from = fields.Date(
+        string='Date From',
+        compute='_compute_date_from',
+        help='Date from invoiced period',
+    )
+    date_to = fields.Date(
+        string='Date To',
+        compute='_compute_date_to',
+        help='Date to invoiced period',
+    )
+    contract_type = fields.Selection(
+        related='analytic_account_id.contract_type',
     )
 
     @api.depends(

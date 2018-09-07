@@ -183,10 +183,47 @@
         <field name="act_window_id" ref="action_account_analytic_overdue_all"/>
     </record>
 
-    <menuitem id="menu_action_account_analytic_overdue_all"
+
+    <menuitem id="menu_action_account_analytic_sale_overdue_all"
               parent="account.menu_finance_receivables"
-              action="action_account_analytic_overdue_all"
+              action="action_account_analytic_sale_overdue_all"
               sequence="99"
               />
+    
+    <!-- Action Purchases/Purchases/Contracts -->
+    <record id="action_account_analytic_purchase_overdue_all" model="ir.actions.act_window">
+        <field name="name">Supplier Contracts</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('contract_type', '=', 'purchase')]</field>
+        <field name="context">{'is_contract':1, 'search_default_not_finished':1, 'search_default_recurring_invoices':1, 'default_recurring_invoices': 1, 'default_contract_type': 'purchase'}</field>
+        <field name="search_view_id" ref="view_account_analytic_account_contract_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new contract.
+            </p>
+        </field>
+    </record>
+    
+    <record id="action_account_analytic_purchase_overdue_all_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_account_analytic_account_journal_tree"/>
+        <field name="act_window_id" ref="action_account_analytic_purchase_overdue_all"/>
+    </record>
+
+    <record id="action_account_analytic_purchase_overdue_all_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account_analytic_account_purchase_form"/>
+        <field name="act_window_id" ref="action_account_analytic_purchase_overdue_all"/>
+    </record>
+    
+    <menuitem id="menu_action_account_analytic_purchase_overdue_all"
+              parent="account.menu_finance_payables"
+              action="action_account_analytic_purchase_overdue_all"
+              sequence="99"
+          />
 
 </odoo>
